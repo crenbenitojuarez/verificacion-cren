@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Constancia - CREN Benito Juárez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #C41E3A;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .status {
+            padding: 30px;
+            text-align: center;
+            background: #f0f9ff;
+            border-bottom: 3px solid #0ea5e9;
+        }
+
+        .status-icon {
+            font-size: 64px;
+            margin-bottom: 10px;
+        }
+
+        .status h2 {
+            color: #0c4a6e;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .status p {
+            color: #075985;
+            font-size: 14px;
+        }
+
+        .data {
+            padding: 30px;
+        }
+
+        .data-row {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 600;
+            color: #374151;
+            width: 140px;
+            flex-shrink: 0;
+        }
+
+        .data-value {
+            color: #1f2937;
+            flex: 1;
+        }
+
+        .footer {
+            background: #f9fafb;
+            padding: 20px 30px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer p {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .footer strong {
+            color: #374151;
+        }
+
+        .error {
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .error-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .error h2 {
+            color: #991b1b;
+            margin-bottom: 10px;
+        }
+
+        .error p {
+            color: #7f1d1d;
+        }
+
+        @media (max-width: 600px) {
+            .data-row {
+                flex-direction: column;
+            }
+            
+            .data-label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="header">
+            <h1>CREN "Benito Juárez"</h1>
+            <p>Centro Regional de Educación Normal</p>
+            <p>Pachuca, Hidalgo</p>
+        </div>
+
+        <div id="content">
+            <!-- El contenido se cargará aquí con JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Obtener parámetros de la URL
+        function obtenerParametros() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                folio: params.get('folio') || '',
+                nombre: params.get('nombre') || '',
+                rol: params.get('rol') || '',
+                actividad: params.get('actividad') || '',
+                fecha: params.get('fecha') || '',
+                lugar: params.get('lugar') || ''
+            };
+        }
+
+        // Decodificar texto (convierte + en espacios y decodifica)
+        function decodificar(texto) {
+            return decodeURIComponent(texto.replace(/\+/g, ' '));
+        }
+
+        // Mostrar los datos
+        function mostrarDatos() {
+            const datos = obtenerParametros();
+            const contenido = document.getElementById('content');
+
+            // Verificar si hay datos
+            if (!datos.folio || !datos.nombre) {
+                contenido.innerHTML = `
+                    <div class="error">
+                        <div class="error-icon">⚠️</div>
+                        <h2>Datos Incompletos</h2>
+                        <p>El código QR no contiene información válida.</p>
+                        <p style="margin-top: 10px; font-size: 12px;">
+                            Por favor, verifica que la constancia sea original.
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Mostrar datos válidos
+            contenido.innerHTML = `
+                <div class="status">
+                    <div class="status-icon">✅</div>
+                    <h2>Constancia Verificada</h2>
+                    <p>Esta constancia ha sido emitida oficialmente</p>
+                </div>
+
+                <div class="data">
+                    <div class="data-row">
+                        <div class="data-label">Folio:</div>
+                        <div class="data-value">${decodificar(datos.folio)}</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="data-label">Nombre:</div>
+                        <div class="data-value">${decodificar(datos.nombre)}</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="data-label">Rol:</div>
+                        <div class="data-value">${decodificar(datos.rol)}</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="data-label">Actividad:</div>
+                        <div class="data-value">${decodificar(datos.actividad)}</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="data-label">Fecha:</div>
+                        <div class="data-value">${decodificar(datos.fecha)}</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="data-label">Lugar:</div>
+                        <div class="data-value">${decodificar(datos.lugar)}</div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <p>
+                        <strong>Constancia oficial emitida por:</strong><br>
+                        Centro Regional de Educación Normal "Benito Juárez"<br>
+                        Pachuca, Hidalgo, México
+                    </p>
+                </div>
+            `;
+        }
+
+        // Ejecutar al cargar la página
+        window.onload = mostrarDatos;
+    </script>
+</body>
+</html>
