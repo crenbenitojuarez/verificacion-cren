@@ -170,8 +170,7 @@
                 nombre: params.get('nombre') || '',
                 rol: params.get('rol') || '',
                 actividad: params.get('actividad') || '',
-                fecha: params.get('fecha') || '',
-                lugar: params.get('lugar') || ''
+                lugarfecha: params.get('lugarfecha') || ''
             };
         }
 
@@ -226,12 +225,8 @@
                         <div class="data-value">${decodificar(datos.actividad)}</div>
                     </div>
                     <div class="data-row">
-                        <div class="data-label">Fecha:</div>
-                        <div class="data-value">${decodificar(datos.fecha)}</div>
-                    </div>
-                    <div class="data-row">
-                        <div class="data-label">Lugar:</div>
-                        <div class="data-value">${decodificar(datos.lugar)}</div>
+                        <div class="data-label">Lugar y Fecha:</div>
+                        <div class="data-value">${decodificar(datos.lugarfecha)}</div>
                     </div>
                 </div>
 
