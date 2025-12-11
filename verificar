@@ -170,22 +170,14 @@
                 nombre: params.get('nombre') || '',
                 rol: params.get('rol') || '',
                 actividad: params.get('actividad') || '',
-                lugarfecha: params.get('lugarfecha') || ''
+                fecha: params.get('fecha') || '',
+                lugar: params.get('lugar') || ''
             };
         }
 
         // Decodificar texto (convierte + en espacios y decodifica)
         function decodificar(texto) {
-            if (!texto) return '';
-            try {
-                // Reemplazar + por espacios
-                texto = texto.replace(/\+/g, ' ');
-                // Decodificar URL
-                return decodeURIComponent(texto);
-            } catch (e) {
-                // Si falla la decodificación, devolver el texto original
-                return texto.replace(/\+/g, ' ');
-            }
+            return decodeURIComponent(texto.replace(/\+/g, ' '));
         }
 
         // Mostrar los datos
@@ -234,8 +226,12 @@
                         <div class="data-value">${decodificar(datos.actividad)}</div>
                     </div>
                     <div class="data-row">
-                        <div class="data-label">Lugar y Fecha:</div>
-                        <div class="data-value">${decodificar(datos.lugarfecha)}</div>
+                        <div class="data-label">Fecha:</div>
+                        <div class="data-value">${decodificar(datos.fecha)}</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="data-label">Lugar:</div>
+                        <div class="data-value">${decodificar(datos.lugar)}</div>
                     </div>
                 </div>
 
