@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=verificar.html">
+    <title>Redirigiendo...</title>
+</head>
+<body>
+    <p>Redirigiendo a la página de verificación...</p>
+    <p>Si no se redirige automáticamente, <a href="verificar.html">haz click aquí</a>.</p>
+</body>
+</html>
+```
+
+5. **Click en "Commit new file"**
+
+6. **Espera 2-3 minutos**
+
+7. **Prueba de nuevo:**
+```
+   https://crenbenitojuarez.github.io/verificacion-cren/verificar.html
+```
+
+---
+
+**O TAMBIÉN prueba abrir directamente con una constancia de prueba:**
+```
+https://crenbenitojuarez.github.io/verificacion-cren/verificar.html?folio=TEST&nombre=Juan+Perez&rol=Moderador&actividad=Congreso&lugarfecha=Pachuca
