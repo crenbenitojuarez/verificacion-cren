@@ -176,7 +176,16 @@
 
         // Decodificar texto (convierte + en espacios y decodifica)
         function decodificar(texto) {
-            return decodeURIComponent(texto.replace(/\+/g, ' '));
+            if (!texto) return '';
+            try {
+                // Reemplazar + por espacios
+                texto = texto.replace(/\+/g, ' ');
+                // Decodificar URL
+                return decodeURIComponent(texto);
+            } catch (e) {
+                // Si falla la decodificación, devolver el texto original
+                return texto.replace(/\+/g, ' ');
+            }
         }
 
         // Mostrar los datos
